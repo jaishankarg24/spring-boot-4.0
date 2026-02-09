@@ -23,6 +23,7 @@ public class DemoApplication implements CommandLineRunner {
 //        this.notificationServiceObj = notificationServiceObj;
 //    }
 
+	//To get all Notification services
 	@Autowired
 	Map<String, NotificationService> notificationServiceMap = new LinkedHashMap<>();
 
