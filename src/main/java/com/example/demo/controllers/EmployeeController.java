@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.EmployeeDTO;
+import com.example.demo.serviceImplementation.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/employees")
@@ -13,6 +15,7 @@ public class EmployeeController {
 //        return "Secret message: asdfal@#$DASD";
 //    }
 
+    /*
     @GetMapping(path = "/{employeeId}")
     public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id) {
         return new EmployeeDTO(id, "Jai", "jai@gmail.com", 27, LocalDate.of(2024, 1, 2), true);
@@ -32,6 +35,28 @@ public class EmployeeController {
 
     @PutMapping String updateEmployeeById() {
         return "Hello from Put";
+    }*/
+
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping(path = "/{employeeId}")
+    public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @GetMapping
+    public List<EmployeeDTO> getAllEmployees(@RequestParam(required = false, name = "inputAge") Integer age,
+                                             @RequestParam(required = false) String sortBy) {
+        return employeeService.getAllEmployees();
+    }
+
+    @PostMapping
+    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee) {
+        return employeeService.createNewEmployee(inputEmployee);
     }
 
 }
