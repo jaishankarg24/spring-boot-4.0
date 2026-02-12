@@ -1,7 +1,17 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDTO {
 
     private Long id;
@@ -9,8 +19,10 @@ public class EmployeeDTO {
     private String email;
     private Integer age;
     private LocalDate dateOfJoining;
+    @JsonProperty("isActive")
     private Boolean isActive;
 
+    /*
     public EmployeeDTO() {
 
     }
@@ -70,6 +82,6 @@ public class EmployeeDTO {
 
     public void setActive(Boolean active) {
         isActive = active;
-    }
+    }*/
 }
 
