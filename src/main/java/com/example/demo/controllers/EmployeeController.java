@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.EmployeeDTO;
+import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.serviceImplementation.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -71,7 +72,8 @@ public class EmployeeController {
         //ResponseEntity.ok() status code
         return employeeDTO
                 .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: "+id));
+                //.orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
